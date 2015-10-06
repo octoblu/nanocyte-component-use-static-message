@@ -16,8 +16,13 @@ describe 'UseStaticMessage', ->
           config:
             staticMessage: 'whatever'
             useStaticMessage: true
+        @returnEnvelope =
+          message: 'whatever'
+          config:
+            staticMessage: 'whatever'
+            useStaticMessage: true
       it 'should return the message', ->
-        expect(@sut.onEnvelope(@envelope)).to.deep.equal 'whatever'
+        expect(@sut.onEnvelope(@envelope)).to.deep.equal @returnEnvelope
 
     describe 'when called with useStaticMessage false', ->
       beforeEach ->
@@ -26,5 +31,10 @@ describe 'UseStaticMessage', ->
           config:
             staticMessage: 'whatever'
             useStaticMessage: false
+        @returnEnvelope =
+          message: 'anything'
+          config:
+            staticMessage: 'whatever'
+            useStaticMessage: false
       it 'should return the message', ->
-        expect(@sut.onEnvelope(@envelope)).to.deep.equal 'anything'
+        expect(@sut.onEnvelope(@envelope)).to.deep.equal @returnEnvelope

@@ -4,7 +4,7 @@ class UseStaticMessage extends ReturnValue
   onEnvelope: (envelope) =>
     { config } = envelope
 
-    return config.staticMessage if config.useStaticMessage
-    return envelope.message
+    envelope.message = config.staticMessage if config.useStaticMessage
+    return envelope
 
 module.exports = UseStaticMessage
