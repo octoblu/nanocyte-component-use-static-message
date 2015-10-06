@@ -9,6 +9,22 @@ describe 'UseStaticMessage', ->
     expect(@sut).to.be.an.instanceOf ReturnValue
 
   describe '->onEnvelope', ->
-    describe 'when called with an envelope', ->
+    describe 'when called with useStaticMessage true', ->
+      beforeEach ->
+        @envelope =
+          message: 'anything'
+          config:
+            staticMessage: 'whatever'
+            useStaticMessage: true
       it 'should return the message', ->
-        expect(@sut.onEnvelope({message: 'anything'})).to.deep.equal 'anything'
+        expect(@sut.onEnvelope(@envelope)).to.deep.equal 'whatever'
+
+    describe 'when called with useStaticMessage false', ->
+      beforeEach ->
+        @envelope =
+          message: 'anything'
+          config:
+            staticMessage: 'whatever'
+            useStaticMessage: false
+      it 'should return the message', ->
+        expect(@sut.onEnvelope(@envelope)).to.deep.equal 'anything'
