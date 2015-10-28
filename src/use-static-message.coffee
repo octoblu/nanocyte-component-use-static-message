@@ -5,6 +5,6 @@ class UseStaticMessage extends ReturnValue
     { config } = envelope
 
     return config.staticMessage if config.useStaticMessage
-    return envelope.message
+    return envelope.message?.payload ? envelope.message
 
 module.exports = UseStaticMessage
