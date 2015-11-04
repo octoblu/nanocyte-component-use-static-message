@@ -2,9 +2,9 @@ ReturnValue = require 'nanocyte-component-return-value'
 
 class UseStaticMessage extends ReturnValue
   onEnvelope: (envelope) =>
-    { config } = envelope
+    {config, message} = envelope
 
     return config.staticMessage if config.useStaticMessage
-    return envelope.message?.payload ? envelope.message
+    message
 
 module.exports = UseStaticMessage
