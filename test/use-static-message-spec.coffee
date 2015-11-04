@@ -12,19 +12,24 @@ describe 'UseStaticMessage', ->
     describe 'when called with useStaticMessage true', ->
       beforeEach ->
         @envelope =
-          message: 'anything'
           config:
             staticMessage: 'whatever'
             useStaticMessage: true
+
+        @result = @sut.onEnvelope @envelope
+
       it 'should return the message', ->
-        expect(@sut.onEnvelope(@envelope)).to.deep.equal 'whatever'
+        expect(@result).to.deep.equal payload: 'whatever'
 
     describe 'when called with useStaticMessage false', ->
       beforeEach ->
         @envelope =
-          message: 'anything'
           config:
             staticMessage: 'whatever'
+            payload: 'anything'
             useStaticMessage: false
+
+        @result = @sut.onEnvelope @envelope
+
       it 'should return the message', ->
-        expect(@sut.onEnvelope(@envelope)).to.deep.equal 'anything'
+        expect(@result).to.deep.equal payload: 'anything'
