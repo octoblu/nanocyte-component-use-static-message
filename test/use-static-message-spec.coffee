@@ -17,7 +17,7 @@ describe 'UseStaticMessage', ->
             staticMessage: 'whatever'
             useStaticMessage: true
       it 'should return the message', ->
-        expect(@sut.onEnvelope(@envelope)).to.deep.equal 'whatever'
+        expect(@sut.onEnvelope(@envelope)).to.deep.equal payload: 'whatever'
 
     describe 'when called with useStaticMessage false', ->
       beforeEach ->
