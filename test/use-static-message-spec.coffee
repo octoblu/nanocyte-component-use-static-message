@@ -1,3 +1,6 @@
+{beforeEach, describe, it} = global
+{expect} = require 'chai'
+
 ReturnValue = require 'nanocyte-component-return-value'
 UseStaticMessage = require '../src/use-static-message'
 
@@ -16,8 +19,21 @@ describe 'UseStaticMessage', ->
           config:
             staticMessage: 'whatever'
             useStaticMessage: true
-      it 'should return the message', ->
+
+      it 'should return the message, wrapped in payload', ->
         expect(@sut.onEnvelope(@envelope)).to.deep.equal payload: 'whatever'
+
+    describe 'when called with useStaticMessage true and noPayloadWrapper true', ->
+      beforeEach ->
+        @envelope =
+          message: 'anything'
+          config:
+            staticMessage: {foo: 'whatever'}
+            useStaticMessage: true
+            noPayloadWrapper: true
+
+      it 'should return the message, sans payload', ->
+        expect(@sut.onEnvelope(@envelope)).to.deep.equal foo: 'whatever'
 
     describe 'when called with useStaticMessage false', ->
       beforeEach ->
